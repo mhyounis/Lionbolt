@@ -1,0 +1,48 @@
+# Muhsin H. Younis - 1/3/2026
+#  VALIDATION INPUT FILE.
+
+PROBLEM SLAB
+
+MESH
+    SLAB
+        THICKNESS   0.0867 # cm
+        ELEMENTS    200
+        STRUCTURE   LINEAR
+    END
+END
+
+ANGULAR
+    PNSCATTERING    15
+END
+
+MATERIALS
+    ALUMINUM # Can choose any name, doesn't have to be caps either
+        DENSITY    2.7 # g / cc
+        Al 1
+    END
+END
+
+PARTICLES
+    ELECTRONS
+        GRID       0.001:0.521:75 # All energies in MeV
+        # Alternatively you can define this same grid with:
+        # GRID       LINEAR
+        # GROUPS     75
+        # MIN        0.001
+        # MAX        0.521
+        SOLVER     GMRES
+        ANGULAR    SN
+    END
+END
+
+BEAM # These are the only two required inputs for the slab case. The only other optional input is AXIS with one number input (the number of degrees that the beam tilts relative to the slab surface)
+    PARTICLE       1
+    MONOCHROMATIC  1
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END

@@ -1,0 +1,1 @@
+Yousef Saad and Martin H. Schultz. GMRES: a generalized minimal residual algorithm for solving nonsymmetric linear systems. SIAM Journal on Scientific and Statistical Computing, 7(3):856–869, July 1986. URL: http://dx.doi.org/10.1137/0907058, doi:10.1137/0907058.

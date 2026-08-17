@@ -1,0 +1,69 @@
+# Muhsin H. Younis - 7/26/2026
+# EXAMPLE INPUT FILE.
+
+PROBLEM GENERAL
+
+MESH
+    GMSH        three_beam.msh
+    SCALE      30.0 30.0 30.0
+END
+
+MATERIALS
+    WATER
+        DENSITY 1.0 # g / cc
+        H   2
+        O   1
+    END
+END
+
+ANGULAR
+    PNSCATTERING    7 # Not quite ideal but this problem is far too intense for my local machine if using 15
+END
+
+PARTICLES
+    PHOTONS
+        GRID        0.001:1.0:25 # Again not ideal group numbers
+        ANGULAR     SN
+        SOLVER      SI
+    END
+    ELECTRONS
+        GRID        0.001:1.0:35 # Not ideal
+        ANGULAR     SN
+        SOLVER      GMRES
+    END
+END
+
+BEAM
+    PARTICLE 1
+    # Not giving a weight because it'll be split among all beams equally anyway
+    MONOCHROMATIC 1
+    AXIS    0.0  0.0 -1.0
+    ORIGIN  0.0  0.0  130.0
+    CUTOUT  RECTANGLE 100.0 0.0 10.0 10.0
+    SPHERICAL
+END
+BEAM
+    PARTICLE 1
+    MONOCHROMATIC 1
+    AXIS    0.0    0.86602540     0.5
+    ORIGIN  0.0  -99.59292144   -42.5
+    CUTOUT  RECTANGLE 100.0 0.0 10.0 10.0
+    SPHERICAL
+END
+BEAM
+    PARTICLE 1
+    MONOCHROMATIC 1
+    AXIS    0.0   -0.86602540     0.5
+    ORIGIN  0.0   99.59292144   -42.5
+    CUTOUT  RECTANGLE 100.0 0.0 10.0 10.0
+    SPHERICAL
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END
+
+STORAGELIMITED # I'm doing this to avoid a large h5 file. Consider turning this off for your own run

@@ -1,0 +1,43 @@
+# Muhsin H. Younis - 1/3/2026
+#  VALIDATION INPUT FILE.
+
+PROBLEM SLAB
+
+MESH
+    SLAB
+        THICKNESS   0.0867
+        ELEMENTS    200
+        STRUCTURE   LINEAR
+    END
+END
+
+ANGULAR
+    PNSCATTERING    15
+END
+
+MATERIALS
+    ALUMINUM # Can choose any name, doesn't have to be caps either
+        DENSITY    2.7 # g / cc
+        Al 1
+    END
+END
+
+PARTICLES
+    ELECTRONS
+        GRID       0.001:5.4:35 # Note, with such a low max energy, and due to how MONOCHROMATIC key functions, here it is preferrable to use a linear grid
+        SOLVER     GMRES
+        ANGULAR    SN
+    END
+END
+
+BEAM
+    PARTICLE       1
+    POLYCHROMATIC  just_some_electrons.txt # This is technically a 6MV photon beam, but I don't want any ambiguity about the fact it's generating electrons here. This isn't supposed to be a physically meaningful solve, just a validation.
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END

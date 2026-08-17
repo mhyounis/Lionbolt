@@ -1,0 +1,46 @@
+# Muhsin H. Younis - 1/3/2026
+#  VALIDATION INPUT FILE.
+
+PROBLEM SLAB
+
+MESH
+    SLAB
+        THICKNESS   0.2
+        ELEMENTS    200
+        STRUCTURE   LINEAR
+    END
+END
+
+ANGULAR
+    PNSCATTERING    15
+END
+
+MATERIALS
+    GOLD
+        DENSITY    19.3 # g / cc
+        Au 1
+    END
+END
+
+PARTICLES
+    ELECTRONS
+        GRID         LOGARITHMIC
+        GROUPS       50
+        MIN          0.001
+        MAX          10.0
+        SOLVER       GMRES
+        ANGULAR      SN
+    END
+END
+
+BEAM
+    PARTICLE       1
+    MONOCHROMATIC  1
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END

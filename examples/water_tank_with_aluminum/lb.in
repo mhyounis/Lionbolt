@@ -1,0 +1,63 @@
+# Muhsin H. Younis - 7/26/2026
+# EXAMPLE INPUT FILE.
+
+PROBLEM GENERAL
+
+MESH
+    GMSH       het_cube_spherical_beam.msh
+    TRANSLATE -0.5 -0.5 0.0
+    SCALE      30.0 30.0 30.0
+END
+
+MATERIALS
+    WATER
+        DENSITY 1.0 # g / cc
+        H   2
+        O   1
+    END
+    ALUMINUM
+        DENSITY 2.7 # g / cc
+        Al 1
+    END
+END
+
+ANGULAR
+    PNSCATTERING    15
+END
+
+PARTICLES
+    PHOTONS
+        GRID        LOGARITHMIC
+        GROUPS      50
+        MIN         0.001
+        MAX         6.0
+        ANGULAR     SN
+        SOLVER      GMRES
+    END
+    ELECTRONS
+        GRID        LOGARITHMIC
+        GROUPS      50
+        MIN         0.001
+        MAX         6.0
+        ANGULAR     SN
+        SOLVER      GMRES
+    END
+END
+
+BEAM
+    PARTICLE      1
+    MONOCHROMATIC 1
+    AXIS    0.0  0.0 -1.0
+    ORIGIN  0.0  0.0  130.0
+    CUTOUT  RECTANGLE 100.0 0.0 10.0 10.0
+    SPHERICAL
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END
+
+STORAGELIMITED

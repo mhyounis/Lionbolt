@@ -1,0 +1,60 @@
+# Muhsin H. Younis - 7/26/2026
+#  VALIDATION INPUT FILE.
+
+PROBLEM SLAB
+
+MESH
+    SLAB # Slabs stack in the order in which they're defined. First slab = closest to the beam
+        THICKNESS    0.01
+        ELEMENTS     50
+        STRUCTURE    LINEAR
+        MATERIAL     1
+    END
+    SLAB
+        THICKNESS    0.002
+        ELEMENTS     50
+        STRUCTURE    LINEAR
+        MATERIAL     2
+    END
+    SLAB
+        THICKNESS    0.07
+        ELEMENTS     150
+        STRUCTURE    LINEAR
+        MATERIAL     1
+    END
+END
+
+MATERIALS
+    ALUMINUM # Can choose any name, doesn't have to be caps either
+        DENSITY 2.7 # g / cc
+        Al 1
+    END
+    GOLD # Can choose any name, doesn't have to be caps either
+        DENSITY 19.3 # g / cc
+        Au 1
+    END
+END
+
+ANGULAR
+    PNSCATTERING 15
+END
+
+PARTICLES
+    ELECTRONS
+        GRID      0.001:1.000:35
+        SOLVER    GMRES
+        ANGULAR   SN
+    END
+END
+
+BEAM
+    PARTICLE      1
+    MONOCHROMATIC 1
+END
+
+POSTPROCESSING
+    FLUENCE
+    DOSE
+    ENERGY
+    CHARGE
+END

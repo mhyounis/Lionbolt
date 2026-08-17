@@ -1,0 +1,1 @@
+This disagreement is likely due to the absence of radiative scattering, which scales like Z^2 and becomes more dominant for higher incident electron energies, in NittanyPhysics. This will be implemented and validated shortly.

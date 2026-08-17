@@ -1,0 +1,71 @@
+#  ==============================================================================
+#    yaml file for Lionbolt's HDF5 reader.
+#    This file defines characters used in the LionboltHDF5.f90 module to name 
+#    HDF5 groups/datasets/attributes.
+#    
+#    If you wish to add characters to the LionboltHDF5.f90 module, add them
+#    here and they will be properly formatted and injected into 
+#    LionboltHDF5Schema.f90 by SchemaGenerator.py. Note that every character 
+#    *must* be defined in a header (like MAIN_ATTRIBUTES, XSLIBRARY, etc.), but 
+#    otherwise, headers may be added by the developer. SCHEMA_VERSION is 
+#    treated uniquely by SchemaGenerator.py
+#    
+#    You may also wish to add these keys to the schema files of Terpdose.
+#  ==============================================================================
+
+SCHEMA_VERSION: '1.0'
+
+MAIN_ATTRIBUTES:
+  ATTR_PROBTYPE: problem_type
+
+XSLIBRARY:
+  GROUP_XSLIBRARY: XS_library
+
+GENERAL:
+  ATTR_OBJTYPE: object_type
+
+MESH:
+  GROUP_MESH: mesh
+  # DATASET_R: # Leaving this here because it demonstrates, with SchemaGenerator.py, how to create an array of schema characters. Can be very useful
+  #   - X
+  #   - Y
+  #   - Z
+  DATASET_R:            global_nodes
+  DATASET_CONNECTIVITY: connectivity
+  DATASET_OFFSET:       offset
+  DATASET_VOLS:         element_volumes
+  ATTR_NUMMATS_M:       number_of_materials
+  ATTR_NUMELS:          number_of_elements
+  ATTR_NUMSD:           number_of_spatial_dofs
+  ATTR_NUMKG:           number_of_global_nodes
+  GROUP_MAT2SD:         material_to_spatial_dof
+
+ANGULAR:
+  ATTR_NUMANGLES:     number_of_angular_dofs
+  DATASET_ANGWEIGHTS: angular_weights
+  DATASET_ABSCISSAE:  abscissae
+
+ENERGY:
+  ATTR_NUMENERGIES: number_of_energy_dofs
+  DATASET_EGRID:    energy_grid
+
+PARTICLES:
+  IS_PARTICLE:        particle
+  GROUP_FL:           fluence
+  GROUP_FL_UNC:       uncollided_fluence
+  GROUP_ANG_FL:       angular_fluence
+  GROUP_ANG_FL_UNC:   uncollided_angular_fluence
+
+PATTERNS:
+  PATTERN_ENERGY:    energy_
+  PATTERN_ANGLE:     angle_
+  PATTERN_MATERIALS: material_
+  
+POSTPROC:
+  PATTERN_DEP:  _deposition
+  DATASET_EDEP: energy
+  DATASET_DDEP: dose
+  DATASET_CDEP: charge
+  ATTR_EDEP:    total_energy
+  ATTR_DDEP:    total_dose
+  ATTR_CDEP:    total_charge

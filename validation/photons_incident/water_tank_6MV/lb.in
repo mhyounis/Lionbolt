@@ -1,0 +1,63 @@
+# Muhsin H. Younis - 7/26/2026
+#  VALIDATION INPUT FILE.
+#  Note, this is a rather coarse mesh for a problem like this.
+#  However this is as good as I can reasonably produce for now,
+#  as these calculations are being done on a local machine 
+#  rather than an HPC cluster.
+#  If interested you may want to use a finer mesh.
+
+PROBLEM GENERAL
+
+MESH
+    GMSH       water_tank.msh
+    SCALE      30.0 30.0 30.0 # Scales the mesh, as the provided file is actually just 1 x 1 x 1 (with scaled-down field size)
+END
+
+MATERIALS
+    WATER
+        DENSITY 1.0 # g / cc
+        H   2
+        O   1
+    END
+END
+
+ANGULAR
+    PNSCATTERING    11
+END
+
+PARTICLES
+    PHOTONS
+        GRID        LOGARITHMIC # I have found that using a fine logarithmic grid for photons in this case is very very important
+        GROUPS      50          # This is logical because the beam gets sampled at rather low energies, where the photon XS change exponentially
+        MIN         0.001
+        MAX         5.4
+        ANGULAR     SN
+        SOLVER      SI
+    END
+    ELECTRONS
+        GRID        LOGARITHMIC
+        GROUPS      50
+        MIN         0.001
+        MAX         5.4
+        ANGULAR     SN
+        SOLVER      GMRES
+    END
+END
+
+BEAM
+    PARTICLE 1
+    POLYCHROMATIC 6MV_photons.txt
+    AXIS    0.0  0.0 -1.0   # Defined in the mesh coordinate system (after any mesh scaling/translating)
+    ORIGIN  0.0  0.0  130.0
+    CUTOUT  RECTANGLE 100.0 0.0 10.0 10.0
+    SPHERICAL
+END
+
+POSTPROCESSING
+    FLUENCE
+    ENERGY
+    DOSE
+    CHARGE
+END
+
+STORAGELIMITED # I'm doing this to avoid a large h5 file. Consider turning this off for your own run
